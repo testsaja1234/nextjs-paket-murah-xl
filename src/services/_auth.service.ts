@@ -1,3 +1,4 @@
+import { authorizationHeader } from "@/utils/authorizationHeader";
 import axios, { AxiosInstance } from "axios";
 
 export class AuthService {
@@ -19,5 +20,12 @@ export class AuthService {
       id: res.data.data.user_detail.id,
       accessToken: res.data.data.token,
     };
+  };
+
+  getDetail = async () => {
+    const res = await this.instance.get("/v1/user-detail", {
+      headers: authorizationHeader(),
+    });
+    return res.data;
   };
 }

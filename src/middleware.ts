@@ -4,7 +4,6 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const currentUser = request.cookies.get("currentUser")?.value;
-  console.log(currentUser);
 
   if (protectedRoutes.includes(request.nextUrl.pathname) && !currentUser) {
     request.cookies.delete("currentUser");
