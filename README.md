@@ -1,5 +1,7 @@
 ## This is a for managing XL package customers
 
+for the service api from this app, you can check in this repoisitory : [https://github.com/hariirawan/lumen-service-paket-murah-xl]
+
 ## Getting Started
 
 First, run the development server:
