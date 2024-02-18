@@ -1,5 +1,5 @@
 import { authService } from "@/services";
-import { User } from "@/types/user";
+import { User, UserDetail } from "@/types/user";
 import Cookie from "js-cookie";
 
 export const useAuth = () => {
@@ -13,5 +13,11 @@ export const useAuth = () => {
     return user as User;
   };
 
-  return { login };
+  const getUserDetail = async () => {
+    const userDetail = await authService.getDetail();
+
+    return userDetail.data as UserDetail;
+  };
+
+  return { login, getUserDetail };
 };
