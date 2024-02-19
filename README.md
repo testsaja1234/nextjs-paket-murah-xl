@@ -1,4 +1,4 @@
-## This is a for managing XL package customers
+## This is a for managing XL package customers and reseller
 
 for the service api from this app, you can check in this repoisitory : [https://github.com/hariirawan/lumen-service-paket-murah-xl]
 
