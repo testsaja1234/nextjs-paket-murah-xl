@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { packageService } from "@/services";
 import { RespPackages } from "@/types/packages";
 
@@ -24,11 +24,11 @@ export const useGetPackage = () => {
   });
   const { getAll } = usePackage();
 
-  const getPackage = useCallback(() => {
+  const getPackage = () => {
     getAll()
       .then((resp: RespPackages) => setData(resp))
       .catch((err) => console.log(err));
-  }, []);
+  };
 
   useEffect(() => {
     getPackage();

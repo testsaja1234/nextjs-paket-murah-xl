@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { Button, Modal } from "flowbite-react";
 
 export default function MenuIcon({ label, link, children }: any) {
+  const [openModal, setOpenModal] = useState(false);
   if (link) {
     return (
       <Link href={link ? link : "/home"} scroll={false}>
@@ -24,7 +25,6 @@ export default function MenuIcon({ label, link, children }: any) {
       </Link>
     );
   } else {
-    const [openModal, setOpenModal] = useState(false);
     return (
       <>
         <Modal
