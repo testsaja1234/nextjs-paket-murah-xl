@@ -32,7 +32,7 @@ export const useGetPackage = () => {
 
   useEffect(() => {
     getPackage();
-  }, [getPackage]);
+  }, []);
 
   return {
     data,

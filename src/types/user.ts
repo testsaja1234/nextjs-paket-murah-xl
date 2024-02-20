@@ -11,6 +11,7 @@ export type UserDetail = {
   email: string;
   role: string;
   balance: number;
+  balance_rp: string;
 };
 
 export type Auth = {

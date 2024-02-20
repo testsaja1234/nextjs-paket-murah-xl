@@ -60,13 +60,17 @@ export default function Packages() {
         size="sm"
         dismissible
         onClose={() => setOpenModalForm(false)}
+        popup
       >
-        <FormPackage
-          reload={() => {
-            getPackage();
-            setOpenModalForm(false);
-          }}
-        />
+        <Modal.Header />
+        <Modal.Body>
+          <FormPackage
+            reload={() => {
+              getPackage();
+              setOpenModalForm(false);
+            }}
+          />
+        </Modal.Body>
       </Modal>
     </div>
   );

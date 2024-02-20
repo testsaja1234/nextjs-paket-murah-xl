@@ -6,6 +6,7 @@ import { AuthContext } from "@/provider/AuthProvider";
 import { Badge, Button, Modal, Pagination, Spinner } from "flowbite-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useContext, useState } from "react";
+import { Bounce, toast } from "react-toastify";
 
 export default function Admin() {
   const router = useRouter();
@@ -18,6 +19,25 @@ export default function Admin() {
   const { process } = useTransaction();
   const [id, setId] = useState<number | null>(null);
   const ctx = useContext(AuthContext);
+
+  async function copyTextToClipboard(text: string) {
+    if ("clipboard" in navigator) {
+      toast.success(`Copied ${text} `, {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      return await navigator.clipboard.writeText(text);
+    } else {
+      return document.execCommand("copy", true, text);
+    }
+  }
 
   return (
     <>
@@ -44,7 +64,7 @@ export default function Admin() {
                   </h3>
                   <div>{val.phone_number}</div>
                 </div>
-                <div>
+                <div className="flex items-center">
                   {ctx?.userDetail?.role === "user" || val.status === "DONE" ? (
                     <Badge>
                       {val.status === "DONE" ? "Selesai" : "Sedang Diproses"}
@@ -60,6 +80,25 @@ export default function Admin() {
                       PROSES
                     </Button>
                   )}
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                    onClick={() => {
+                      console.log(val.phone_number);
+                      copyTextToClipboard(val.phone_number);
+                    }}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"
+                    />
+                  </svg>
                 </div>
               </div>
             );
@@ -146,13 +185,17 @@ export default function Admin() {
         size="sm"
         dismissible
         onClose={() => setOpenModalForm(false)}
+        popup
       >
-        <FormCreateTransaction
-          reload={() => {
-            setOpenModalForm(false);
-            getTransaction();
-          }}
-        />
+        <Modal.Header />
+        <Modal.Body>
+          <FormCreateTransaction
+            reload={() => {
+              setOpenModalForm(false);
+              getTransaction();
+            }}
+          />
+        </Modal.Body>
       </Modal>
     </>
   );

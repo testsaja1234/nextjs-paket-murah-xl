@@ -28,4 +28,25 @@ export class AuthService {
     });
     return res.data;
   };
+
+  users = async () => {
+    const res = await this.instance.get("/v1/users", {
+      headers: authorizationHeader(),
+    });
+    return res.data;
+  };
+
+  topup = async (id: number, body = {}) => {
+    const res = await this.instance.put(`/v1/users/${id}`, body, {
+      headers: authorizationHeader(),
+    });
+    return res.data;
+  };
+
+  createUser = async (body = {}) => {
+    const res = await this.instance.post(`/v1/create-user`, body, {
+      headers: authorizationHeader(),
+    });
+    return res.data;
+  };
 }

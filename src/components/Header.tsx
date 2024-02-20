@@ -38,6 +38,8 @@ export default function Header() {
             {ctx?.userDetail?.role === "user" && (
               <div>{ctx?.userDetail?.balance}</div>
             )}
+
+            <Link href={"/admin/package"}>Paket</Link>
           </div>
           {pathname === "/admin" && (
             <div className="flex-1 flex mt-4">

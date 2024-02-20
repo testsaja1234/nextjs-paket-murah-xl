@@ -47,6 +47,7 @@ export default function MenuIcon({ label, link, children }: any) {
                   color="failure"
                   onClick={() => {
                     Cookies.remove("currentUser");
+                    Cookies.remove("package_id");
                     window.location.reload();
                   }}
                 >

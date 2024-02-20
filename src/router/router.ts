@@ -4,6 +4,7 @@ export const protectedRoutes = [
   "/admin/transactions",
   "/admin/create-transaction",
   "/admin/create-package",
+  "/admin/reseller",
 ];
 export const authRoutes = ["/login"];
 export const publicRoutes = ["/about", "/"];

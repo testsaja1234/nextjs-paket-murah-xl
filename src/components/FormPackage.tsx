@@ -16,7 +16,7 @@ export default function FormPackage({ reload }: { reload: () => void }) {
   };
 
   return (
-    <div className="bg-white flex flex-col gap-2 p-2 rounded-lg">
+    <div className="bg-white flex flex-col gap-2 rounded-lg">
       <div>
         <div className="block">
           <Label htmlFor="small" value="Nama Paket" />

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { RespTransactions } from "./../types/transaction";
 import { transactionService } from "@/services";
 import { useSearchParams } from "next/navigation";
+import Cookies from "js-cookie";
 
 export const useTransaction = () => {
   const getAll = async (params = {}) => {
@@ -25,6 +26,7 @@ export const useTransaction = () => {
 
 export const useGetTransaction = () => {
   const searchParams = useSearchParams();
+  const packageID = Cookies.get("package_id");
   const queryParams = JSON.stringify(
     Object.fromEntries(searchParams.entries())
   );
@@ -44,6 +46,7 @@ export const useGetTransaction = () => {
     let params = JSON.parse(queryParams);
     getAll({
       ...params,
+      package_id: packageID,
       status: params.status ? params.status : "PROCESSING",
     })
       .then((resp: RespTransactions) => {
@@ -53,7 +56,7 @@ export const useGetTransaction = () => {
       .catch((err) => {
         setLoading(false);
       });
-  }, [queryParams]);
+  }, [queryParams, packageID]);
 
   useEffect(() => {
     getTransaction();

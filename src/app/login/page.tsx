@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
@@ -13,7 +12,10 @@ export default function Admin() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    login(data.email, data.password).then((_) => router.push("/admin"));
+    login(data.email, data.password).then((_) => {
+      router.push("/admin");
+      window.location.reload();
+    });
   };
 
   return (
