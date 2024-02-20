@@ -3,13 +3,20 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Cookies from "js-cookie";
 import { Button, Modal } from "flowbite-react";
+import { usePathname } from "next/navigation";
 
 export default function MenuIcon({ label, link, children }: any) {
   const [openModal, setOpenModal] = useState(false);
+  const pathname = usePathname();
+
   if (link) {
     return (
       <Link href={link ? link : "/home"} scroll={false}>
-        <div className="flex flex-col items-center cursor-pointer">
+        <div
+          className={`flex flex-col items-center cursor-pointer ${
+            pathname == link && "text-cyan-700"
+          } `}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

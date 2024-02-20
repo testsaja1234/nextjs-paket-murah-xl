@@ -39,7 +39,11 @@ export default function Header() {
               <div>{ctx?.userDetail?.balance}</div>
             )}
 
-            <Link href={"/admin/package"}>Paket</Link>
+            {ctx?.userDetail?.role === "admin" && (
+              <Link href={"/admin/package"}>
+                <Button size={"xs"}>Paket</Button>
+              </Link>
+            )}
           </div>
           {pathname === "/admin" && (
             <div className="flex-1 flex mt-4">

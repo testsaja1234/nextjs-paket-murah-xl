@@ -1,13 +1,15 @@
 "use client";
 
 import { useGetPackage } from "@/hooks/usePackage";
-import { useRouter } from "next/navigation";
 import React from "react";
 import Cookies from "js-cookie";
 
 export default function PackageList() {
   const { data } = useGetPackage();
-  const router = useRouter();
+
+  if (data.data.length < 1) {
+    // window.location.replace("/admin");
+  }
 
   return (
     <div className=" bg-white px-4 space-y-2  py-4 rounded-md ">

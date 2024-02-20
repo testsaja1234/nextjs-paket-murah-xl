@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { packageService } from "@/services";
 import { RespPackages } from "@/types/packages";
+import { toast } from "react-toastify";
 
 export const usePackage = () => {
   const getAll = async () => {
@@ -17,6 +18,7 @@ export const usePackage = () => {
 };
 
 export const useGetPackage = () => {
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState<RespPackages>({
     status: false,
     message: "",
@@ -25,9 +27,20 @@ export const useGetPackage = () => {
   const { getAll } = usePackage();
 
   const getPackage = () => {
+    setLoading(true);
     getAll()
-      .then((resp: RespPackages) => setData(resp))
-      .catch((err) => console.log(err));
+      .then((resp: RespPackages) => {
+        setData(resp);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        if (err.response) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error("Terjadi Kesalahan sistem");
+        }
+      });
   };
 
   useEffect(() => {
@@ -37,5 +50,6 @@ export const useGetPackage = () => {
   return {
     data,
     getPackage,
+    loading,
   };
 };

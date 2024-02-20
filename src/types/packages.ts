@@ -9,4 +9,5 @@ export type Package = {
   name: string;
   desc: string;
   price: number;
+  stock: number;
 };

@@ -1,18 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button, Label, TextInput } from "flowbite-react";
+import { Button, Label, TextInput, Textarea } from "flowbite-react";
 import { usePackage } from "@/hooks/usePackage";
 
 export default function FormPackage({ reload }: { reload: () => void }) {
   const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState("");
+  const [stock, setStock] = useState("");
   const [desc, setDesc] = useState("");
 
   const { create } = usePackage();
 
   const handleSubmit = () => {
-    create({ name, price, desc }).then(() => reload());
+    create({ name, price, desc, stock }).then(() => reload());
   };
 
   return (
@@ -39,17 +40,28 @@ export default function FormPackage({ reload }: { reload: () => void }) {
           type="number"
           sizing="sm"
           value={price}
-          onChange={(e) => setPrice(Number(e.target.value))}
+          onChange={(e) => setPrice(e.target.value)}
+        />
+      </div>
+      <div>
+        <div className="block">
+          <Label htmlFor="small" value="Stok" />
+        </div>
+        <TextInput
+          id="small"
+          type="number"
+          sizing="sm"
+          value={stock}
+          onChange={(e) => setStock(e.target.value)}
         />
       </div>
       <div>
         <div className="block">
           <Label htmlFor="large" value="Deskripsi" />
         </div>
-        <TextInput
+        <Textarea
           id="large"
-          type="text"
-          sizing="lg"
+          rows={3}
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
         />
